@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ShoppingCartDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ShoppingMallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -180,7 +180,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductStock_Products_ProductsID">
+        <Association Name="FK_ProductStock_Products_ProductID">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ProductStock" Type="Self.ProductStock" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +216,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ShoppingCartDatabaseModelStoreContainer">
+        <EntityContainer Name="ShoppingMallModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
@@ -246,7 +246,7 @@
             <End Role="SubCategory" EntitySet="SubCategory" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductStock_Products_ProductsID" Association="Self.FK_ProductStock_Products_ProductsID">
+          <AssociationSet Name="FK_ProductStock_Products_ProductID" Association="Self.FK_ProductStock_Products_ProductID">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductStock" EntitySet="ProductStock" />
           </AssociationSet>
@@ -259,10 +259,11 @@
             <End Role="SubCategory" EntitySet="SubCategory" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ShoppingCartDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ShoppingMallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -329,10 +330,10 @@
           <Property Name="Price" Type="Decimal" Precision="8" Scale="2" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Int32" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Products_ProductsID" FromRole="Products" ToRole="OrderDetail" />
           <NavigationProperty Name="SubCategory" Relationship="Self.FK_Products_SubCategory_SuvCategoryID" FromRole="Products" ToRole="SubCategory" />
-          <NavigationProperty Name="ProductStocks" Relationship="Self.FK_ProductStock_Products_ProductsID" FromRole="Products" ToRole="ProductStock" />
-          <Property Name="Qty" Type="Int32" />
+          <NavigationProperty Name="ProductStocks" Relationship="Self.FK_ProductStock_Products_ProductID" FromRole="Products" ToRole="ProductStock" />
         </EntityType>
         <EntityType Name="ProductStock">
           <Key>
@@ -344,7 +345,7 @@
           <Property Name="ReamingQty" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductStock_Products_ProductsID" FromRole="ProductStock" ToRole="Products" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductStock_Products_ProductID" FromRole="ProductStock" ToRole="Products" />
         </EntityType>
         <EntityType Name="Shipping">
           <Key>
@@ -478,7 +479,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductStock_Products_ProductsID">
+        <Association Name="FK_ProductStock_Products_ProductID">
           <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
           <End Role="ProductStock" Type="Self.ProductStock" Multiplicity="*" />
           <ReferentialConstraint>
@@ -528,7 +529,7 @@
             <End Role="SubCategory" EntitySet="SubCategories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductStock_Products_ProductsID" Association="Self.FK_ProductStock_Products_ProductsID">
+          <AssociationSet Name="FK_ProductStock_Products_ProductID" Association="Self.FK_ProductStock_Products_ProductID">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductStock" EntitySet="ProductStocks" />
           </AssociationSet>
@@ -538,9 +539,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ShoppingCartDatabaseModelStoreContainer" CdmEntityContainer="ShoppingCartDatabaseContexts">
+        <EntityContainerMapping StorageEntityContainer="ShoppingMallModelStoreContainer" CdmEntityContainer="ShoppingCartDatabaseContexts">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Category">
+            <EntityTypeMapping TypeName="ShoppingMallModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -550,7 +551,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Order">
+            <EntityTypeMapping TypeName="ShoppingMallModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="UsersID" ColumnName="UsersID" />
@@ -563,7 +564,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.OrderDetail">
+            <EntityTypeMapping TypeName="ShoppingMallModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
                 <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -577,7 +578,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaymentInfoes">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.PaymentInfo">
+            <EntityTypeMapping TypeName="ShoppingMallModel.PaymentInfo">
               <MappingFragment StoreEntitySet="PaymentInfo">
                 <ScalarProperty Name="PaymentInfoID" ColumnName="PaymentInfoID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -588,9 +589,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Product">
+            <EntityTypeMapping TypeName="ShoppingMallModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="SubcategoyID" ColumnName="SubcategoyID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -601,11 +601,12 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductStocks">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.ProductStock">
+            <EntityTypeMapping TypeName="ShoppingMallModel.ProductStock">
               <MappingFragment StoreEntitySet="ProductStock">
                 <ScalarProperty Name="ProductStockId" ColumnName="ProductStockId" />
                 <ScalarProperty Name="ProductsId" ColumnName="ProductsId" />
@@ -617,7 +618,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shippings">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Shipping">
+            <EntityTypeMapping TypeName="ShoppingMallModel.Shipping">
               <MappingFragment StoreEntitySet="Shipping">
                 <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -633,7 +634,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategories">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.SubCategory">
+            <EntityTypeMapping TypeName="ShoppingMallModel.SubCategory">
               <MappingFragment StoreEntitySet="SubCategory">
                 <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -644,7 +645,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.User">
+            <EntityTypeMapping TypeName="ShoppingMallModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UsersID" ColumnName="UsersID" />
                 <ScalarProperty Name="FristName" ColumnName="FristName" />

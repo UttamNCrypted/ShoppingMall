@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ShoppingCartDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="ShoppingMallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="CategoryID" />
@@ -175,7 +175,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProductStock_Products_ProductsID">
+  <Association Name="FK_ProductStock_Products_ProductID">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="ProductStock" Type="Self.ProductStock" Multiplicity="*" />
     <ReferentialConstraint>
@@ -211,7 +211,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ShoppingCartDatabaseModelStoreContainer">
+  <EntityContainer Name="ShoppingMallModelStoreContainer">
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
@@ -241,7 +241,7 @@
       <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductStock_Products_ProductsID" Association="Self.FK_ProductStock_Products_ProductsID">
+    <AssociationSet Name="FK_ProductStock_Products_ProductID" Association="Self.FK_ProductStock_Products_ProductID">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductStock" EntitySet="ProductStock" />
     </AssociationSet>

@@ -1319,6 +1319,16 @@
     <Content Include="MailTemplate\ForgotPassword.html" />
     <Content Include="MailTemplate\UserRegistration.html" />
     <Content Include="Areas\Admin\Views\AdminHome\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Default1\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Default1\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Default1\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Default1\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Default1\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductStock\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductStock\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductStock\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductStock\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductStock\Delete.cshtml" />
     <EntityDeploy Include="Models\ShoppingMall.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ShoppingMall.Designer.cs</LastGenOutput>
@@ -1336,16 +1346,6 @@
       <DependentUpon>ShoppingMall.edmx</DependentUpon>
       <LastGenOutput>ShoppingMall.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Admin\Views\Default1\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Default1\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Default1\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Default1\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Default1\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductStock\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductStock\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductStock\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductStock\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductStock\Delete.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="README.txt" />
     <Content Include="Scripts\jquery-1.7.1.js" />

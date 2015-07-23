@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ShoppingCartDatabaseModelStoreContainer" CdmEntityContainer="ShoppingCartDatabaseContexts">
+  <EntityContainerMapping StorageEntityContainer="ShoppingMallModelStoreContainer" CdmEntityContainer="ShoppingCartDatabaseContexts">
     <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Category">
+      <EntityTypeMapping TypeName="ShoppingMallModel.Category">
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Order">
+      <EntityTypeMapping TypeName="ShoppingMallModel.Order">
         <MappingFragment StoreEntitySet="Order">
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="UsersID" ColumnName="UsersID" />
@@ -25,7 +25,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.OrderDetail">
+      <EntityTypeMapping TypeName="ShoppingMallModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
           <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -39,7 +39,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PaymentInfoes">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.PaymentInfo">
+      <EntityTypeMapping TypeName="ShoppingMallModel.PaymentInfo">
         <MappingFragment StoreEntitySet="PaymentInfo">
           <ScalarProperty Name="PaymentInfoID" ColumnName="PaymentInfoID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -50,9 +50,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Product">
+      <EntityTypeMapping TypeName="ShoppingMallModel.Product">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SubcategoyID" ColumnName="SubcategoyID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -63,11 +62,12 @@
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductStocks">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.ProductStock">
+      <EntityTypeMapping TypeName="ShoppingMallModel.ProductStock">
         <MappingFragment StoreEntitySet="ProductStock">
           <ScalarProperty Name="ProductStockId" ColumnName="ProductStockId" />
           <ScalarProperty Name="ProductsId" ColumnName="ProductsId" />
@@ -79,7 +79,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Shippings">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.Shipping">
+      <EntityTypeMapping TypeName="ShoppingMallModel.Shipping">
         <MappingFragment StoreEntitySet="Shipping">
           <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -95,7 +95,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SubCategories">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.SubCategory">
+      <EntityTypeMapping TypeName="ShoppingMallModel.SubCategory">
         <MappingFragment StoreEntitySet="SubCategory">
           <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
@@ -106,7 +106,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="ShoppingCartDatabaseModel.User">
+      <EntityTypeMapping TypeName="ShoppingMallModel.User">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="UsersID" ColumnName="UsersID" />
           <ScalarProperty Name="FristName" ColumnName="FristName" />

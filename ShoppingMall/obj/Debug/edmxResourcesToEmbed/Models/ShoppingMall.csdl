@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ShoppingCartDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ShoppingMallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="CategoryID" />
@@ -66,10 +66,10 @@
     <Property Name="Price" Type="Decimal" Precision="8" Scale="2" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Qty" Type="Int32" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Products_ProductsID" FromRole="Products" ToRole="OrderDetail" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_Products_SubCategory_SuvCategoryID" FromRole="Products" ToRole="SubCategory" />
-    <NavigationProperty Name="ProductStocks" Relationship="Self.FK_ProductStock_Products_ProductsID" FromRole="Products" ToRole="ProductStock" />
-    <Property Name="Qty" Type="Int32" />
+    <NavigationProperty Name="ProductStocks" Relationship="Self.FK_ProductStock_Products_ProductID" FromRole="Products" ToRole="ProductStock" />
   </EntityType>
   <EntityType Name="ProductStock">
     <Key>
@@ -81,7 +81,7 @@
     <Property Name="ReamingQty" Type="Int32" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_ProductStock_Products_ProductsID" FromRole="ProductStock" ToRole="Products" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_ProductStock_Products_ProductID" FromRole="ProductStock" ToRole="Products" />
   </EntityType>
   <EntityType Name="Shipping">
     <Key>
@@ -215,7 +215,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProductStock_Products_ProductsID">
+  <Association Name="FK_ProductStock_Products_ProductID">
     <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
     <End Role="ProductStock" Type="Self.ProductStock" Multiplicity="*" />
     <ReferentialConstraint>
@@ -265,7 +265,7 @@
       <End Role="SubCategory" EntitySet="SubCategories" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductStock_Products_ProductsID" Association="Self.FK_ProductStock_Products_ProductsID">
+    <AssociationSet Name="FK_ProductStock_Products_ProductID" Association="Self.FK_ProductStock_Products_ProductID">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductStock" EntitySet="ProductStocks" />
     </AssociationSet>

@@ -12,14 +12,14 @@ namespace ShoppingMall.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class User
     {
         public User()
         {
             this.Orders = new HashSet<Order>();
         }
-    
+
         public System.Guid UsersID { get; set; }
         [Required]
         public string FristName { get; set; }
@@ -43,13 +43,13 @@ namespace ShoppingMall.Models
         public string Country { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
-       
+
         public Nullable<bool> IsAdmin { get; set; }
         [Required]
         public string ZipCode { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-    
+
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
