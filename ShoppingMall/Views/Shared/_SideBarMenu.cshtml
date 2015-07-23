@@ -1,0 +1,123 @@
+﻿
+<div id="sidebar" class="span3">
+    @{
+        ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+        var categories = db.Categories.ToList();
+        var maxProductPrice = db.Products.Max(p => p.Price).Value;
+        Session["maxProductPrice"] = maxProductPrice;
+
+        // var subcategory = db.SubCategories.Where(sc =>sc. ).ToList();
+
+        int item = 0;
+        if (Session["AddtoCartItems"] != null)
+        {
+            var list = Session["AddtoCartItems"] as List<ShoppingMall.Models.AddtoCart>;
+            item = list.Count;
+
+        }
+
+
+    <div class="well well-small" style="padding:3px;"><a id="myCart" href="@Url.Action("ViewCart", "Home")"><img src="~/Content/themes/themes/images/ico-cart.png" alt="cart" style="margin-right:0px;">@item Items in your cart  <span class="badge badge-warning pull-right">
+        RS.@if (Session["GrandTotal"] != null)
+           {
+      @Session["GrandTotal"].ToString();
+           }
+           else
+           {
+        <span>0.00</span>
+           }
+                                                                      </span></a></div>
+        <ul id="sideManu" class="nav nav-tabs nav-stacked">
+
+
+            @foreach (var category in categories)
+            {
+                <li class="subMenu open">
+                    <a> @category.CategoryName [@category.SubCategories.Count]</a>
+
+
+                    <ul>
+                        @foreach (var subCategory in category.SubCategories)
+                        {
+                            <li><a class="active" href="@Url.Action("SearchBySubcategoryName", "Home", new { SubCategoryId = subCategory.SubCategoryID, categoryid=Guid.Empty, pageNum = 1 })"><i class="icon-chevron-right"></i>@subCategory.SubCategoryName (@subCategory.Products.Count) </a></li>
+
+                        }
+                    </ul>
+                </li>
+            }
+
+        </ul>
+        <br />
+       <p>
+  <label for="amount">Price Range Filter:</label>
+  <input type="text" id="amount" readonly="readonly" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+ 
+<div id="slider-range" style="width:200px;"></div>
+    }
+</div>
+
+
+<link rel="stylesheet" href="~/Content/jquery-ui.css">
+  <script src="~/Content/jquery-1.10.2.js"></script>
+  <script src="~/Content/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+
+      function getQueryStringValue (key) {  
+          return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+      }
+
+      $(function () {
+
+          var min = 50;
+          var max = parseInt('@Request.RequestContext.HttpContext.Session["maxProductPrice"]');
+          var pageNumber = getQueryStringValue("pageNum");
+          var SubCategoryId = getQueryStringValue("SubCategoryId");
+          var CategoryId = getQueryStringValue("CategoryId");
+
+
+          if (max == null)
+          {
+              max = 5000;
+          }
+          $("#amount").val("$" + min + " - $" + max);
+          $("#slider-range").slider({
+              range: true,
+              min: min,
+              max: max,
+              values: [min, max],
+              slide: function (event, ui) {
+                  $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+              },
+              stop: function (event, ui) {
+                  var start = parseInt(ui.values[0]);
+                  var end = parseInt(ui.values[1]);
+                  $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                  //alert("start = " + start + "end =" + end);
+                  GetProducts(start, end, pageNumber, SubCategoryId, CategoryId);
+              }
+          });
+          //$("#amount").val("$" + $("#slider-range").slider("values", 0) +
+          //  " - $" + $("#slider-range").slider("values", 1));
+      });
+
+      function GetProducts(start, end, pageNumber, SubCategoryId, CategoryId) {
+          $.ajax({
+              type: "POST",
+              url: '@Url.Action("getProductBySlider", "Home")',
+              data: { startPrice: start, endPrice: end, pageNumber: pageNumber, subcategoryid: SubCategoryId, categoryid: CategoryId },
+              success: OnSuccess,
+              failure: function (response) {
+                  alert(response.responseText);
+              },
+              error: function (response) {
+                  alert(response.responseText);
+              }
+          });
+      }
+      function OnSuccess(response) {
+          $("#blockView").html(response);
+      }
+      
+  </script>

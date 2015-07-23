@@ -1,0 +1,119 @@
+﻿
+
+<h4>Latest Products </h4>
+<div class="well well-small">
+    <div class="row-fluid">
+        <ul class="thumbnails">
+
+            @{
+                ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+
+                var products = db.Products.Where(p => p.CreateDate != null).OrderByDescending(p => p.CreateDate).ToList();
+
+                foreach (var product in products.Skip(0).Take(4).ToList())
+                {
+
+                    <li class="span3">
+                        <div class="thumbnail" style="background-color:white;">
+                            <a href="@Url.Action("ProductDetails", "Home", new { ProductID = product.ProductID })">
+
+                                <img style="height:250px;" src="@Url.Content("~/Content/ProductImage/")@product.ProductImage" alt="" />
+
+                            </a>
+                            <div class="caption">
+                                <h5 style=" max-height: 24px; overflow: hidden;"><a href="@Url.Action("ProductDetails","Home",new{ProductID=product.ProductID})">@product.ProductName</a></h5>
+                                <p style="max-height:60px; min-height:60px; overflow:hidden;">
+                                    @product.ProductDescription
+                                </p>
+
+                                <h4 style="text-align:center; padding-top:10px;"><a class="btn" href="@Url.Action("ProductDetails","Home",new{ProductID=product.ProductID})"> <i class="icon-zoom-in"></i></a> <a class="btn" href="@Url.Action("AddtoCart", "Home", new { ProductId = product.ProductID })">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">@product.Price</a></h4>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            }
+        </ul>
+
+        <div style="float:right;">
+            <a href="@Url.Action("AllLatestProduct", "Home", new {SubCategoryId= Guid.Empty, pageNum=1, categoryid=Guid.Empty })" class="btn btn-primary">View more Products</a>
+        </div>
+
+    </div>
+    </div>
+        @*<div class="caption">
+                  <h5>Product name</h5>
+                  <p>
+                    Lorem Ipsum is simply dummy text.
+                  </p>
+
+                  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <a  href="product_details.html"><img src="~/Content/themes/themes/images/products/7.jpg" alt=""/></a>
+                <div class="caption">
+                  <h5>Product name</h5>
+                  <p>
+                    Lorem Ipsum is simply dummy text.
+                  </p>
+                 <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <a  href="product_details.html"><img src="~/Content/themes/themes/images/products/8.jpg" alt=""/></a>
+                <div class="caption">
+                  <h5>Product name</h5>
+                  <p>
+                    Lorem Ipsum is simply dummy text.
+                  </p>
+                   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <a  href="product_details.html"><img src="~/Content/themes/themes/images/products/9.jpg" alt=""/></a>
+                <div class="caption">
+                  <h5>Product name</h5>
+                  <p>
+                    Lorem Ipsum is simply dummy text.
+                  </p>
+                  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <a  href="product_details.html"><img src="~/Content/themes/themes/images/products/10.jpg" alt=""/></a>
+                <div class="caption">
+                  <h5>Product name</h5>
+                  <p>
+                    Lorem Ipsum is simply dummy text.
+                  </p>
+                  <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+                </div>
+              </div>
+            </li>
+            <li class="span3">
+              <div class="thumbnail">
+                <a  href="product_details.html"><img src="~/Content/themes/themes/images/products/11.jpg" alt=""/></a>
+                <div class="caption">
+                  <h5>Product name</h5>
+                  <p>
+                    Lorem Ipsum is simply dummy text.
+                  </p>
+                   <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+                </div>
+              </div>
+            </li>*@
+        @*  </ul>	*@
+
+
+
+
+

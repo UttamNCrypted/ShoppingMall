@@ -1,0 +1,157 @@
+﻿@model ShoppingMall.Models.User
+@{
+    ViewBag.Title = "AccountSetting";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div style="margin-left:20%;">
+<h2>Account Setting</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.HiddenFor(model => model.UsersID)
+    @Html.HiddenFor(model => model.CreateDate)
+    @Html.HiddenFor(model => model.IsAdmin)
+    @Html.HiddenFor(model => model.Password)
+
+
+    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend></legend>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.UsersId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UsersId)
+            @Html.ValidationMessageFor(model => model.UsersId)
+        </div>*@
+
+        <div class="editor-label">
+            @if (TempData["ErrorMsg"] != null && TempData["ErrorMsg"].ToString() != "")
+            {
+                if (TempData["ErrorMsg"].ToString().Contains("Error"))
+                {
+                    <label style="color:red;">@TempData["ErrorMsg"].ToString()</label>
+                }
+                else
+                {
+                    <label style="color:green;">@TempData["ErrorMsg"].ToString()</label>
+                }
+            }
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FristName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FristName)
+            @Html.ValidationMessageFor(model => model.FristName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmailID)
+            @Html.ValidationMessageFor(model => model.EmailID)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Country)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Country)
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PhoneNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+       @* <div class="editor-label">
+            @Html.LabelFor(model => model.IsAdmin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsAdmin)
+            @Html.ValidationMessageFor(model => model.IsAdmin)
+        </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ZipCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ZipCode)
+            @Html.ValidationMessageFor(model => model.ZipCode)
+        </div>
+
+       @* <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedDate)
+            @Html.ValidationMessageFor(model => model.CreatedDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedDate)
+            @Html.ValidationMessageFor(model => model.ModifiedDate)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Save" />
+            <a href="@Url.Action("Index","Home")" style="margin-left:15px; padding:3px; border: 1px solid gray;">Cancel</a>
+        </p>
+    </fieldset>
+}
+
+</div>

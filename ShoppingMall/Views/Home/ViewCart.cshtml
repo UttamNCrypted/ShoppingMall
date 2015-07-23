@@ -1,0 +1,44 @@
+@{
+    ViewBag.Title = "View Cart";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+
+            <div class="span12">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a> <span class="divider">/</span></li>
+                    <li class="active">SHOPPING CART</li>
+                </ul>
+                @{
+                    int itemCount = 0;
+                    List<ShoppingMall.Models.AddtoCart> list = Session["AddtoCartItems"] as List<ShoppingMall.Models.AddtoCart>;
+
+                    if (Session["AddtoCartItems"] != null)
+                    {
+
+
+                        itemCount = list.Count;
+                    }
+                    <h3>SHOPPING CART [ <small>@itemCount Item(s) </small>]<a href="@Url.Action("Index", "Home")" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
+                    <hr class="soft" />
+                
+
+                    if (Session["UserName"] == null)
+                    {
+                        //@Html.Partial("_Login")
+
+                    }
+
+                    @Html.Partial("_CartProducts")
+                }
+
+                <a href="@Url.Action("Index", "Home")" class="btn btn-large"><i class="icon-arrow-left"></i>Continue Shopping </a>
+                <a href="@Url.Action("CheckLogin", "Home")" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+
+            </div>
+        </div>
+    </div>
+</div>
