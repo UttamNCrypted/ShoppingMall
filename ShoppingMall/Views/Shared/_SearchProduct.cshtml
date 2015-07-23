@@ -1,0 +1,27 @@
+﻿@using (Html.BeginForm("SearchByCategoryAndProductName1", "Home", FormMethod.Get))
+{
+
+    <input id="ProductName" name="ProductName" class="srchTxt"  type="text" placeholder="Product Name" style="margin-top:7px;" />
+    <input id="pageNum" name="pageNum" value="1" style="display:none" type="text" />
+     <input id="SubCategoryId" name="SubCategoryId" value="00000000-0000-0000-0000-000000000000" style="display:none" type="text" />
+    <select class="span1" id="CategoryId" name="CategoryId" style="width:250px; margin-top:7px;">
+        
+        <option selected="selected" value="00000000-0000-0000-0000-000000000000">All</option>
+        @{
+    ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+    var categories = db.Categories.ToList();
+
+    foreach (var category in categories)
+    {
+        <option value="@category.CategoryID">@category.CategoryName</option>
+    }
+        }
+    </select>
+<button type="submit" id="submitButton" class="btn btn-primary" style="padding:7px 25px 7px 25px;">Search</button>
+    @*<ul id="topMenu" class="nav pull-right">
+                        <li class=""><a href="special_offer.html">Specials Offer</a></li>
+                        <li class=""><a href="normal.html">Delivery</a></li>
+                        <li class=""><a href="contact.html">Contact</a></li>
+                        
+                    </ul>*@
+}

@@ -1,0 +1,126 @@
+﻿@model List<ShoppingMall.Models.AddtoCart>
+
+
+@{
+    ViewBag.Title = "Shopping Cart Products";
+    Layout = null;
+}
+<script type="text/javascript">
+    function removeCurrentProduct(index) {
+        $.post(
+             "@Url.Action("RemoveAddtoCartProduct", "Home")",
+             { Index: index },
+             function (data) {
+                 if (data == "Success") {
+                     location.href = '@Url.Action("ViewCart")';
+                 }
+             }
+
+          );
+         }
+
+         function test(id, productId) {
+             $.post(
+                  "@Url.Action("ChangePriceByQty", "Home")",
+             { Qty: id.value, ProductId: productId },
+             function (data) {
+                 if (data == "Success") {
+                     location.href = '@Url.Action("ViewCart")';
+                 }
+             }
+
+          );
+         }
+
+</script>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Quantity/Update</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Tax</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            
+            //var products = Session["AddtoCartItems"] as List<ShoppingMall.Models.Product>;
+            ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+
+            decimal? seminGrandTotal = 0.0M, grandTotal = 0.0M, grandTax = 0.0M,productprice=0.0M;
+            decimal? grandDiscount = 0.0M;
+            int index = 0;
+            //int? remainingQty = 0;
+            foreach (var product in Model)
+            {
+                int qty = product.Qty;
+                decimal tax = 0M, taxAmount = 0.04M, total = 0.0M;
+                decimal? discount;
+               
+                     //remainingQty = db.ProductStocks.Where(ps => ps.ProductsId == product.ProductId).ToList()[0].ReamingQty;
+                //remainingQty = db.ProductStocks.Where(ps => ps.ProductsId == product.ProductId).ToList();
+                
+                if (product.Discount != null)
+                {
+                    discount = ((product.Price * qty) * product.Discount) / 100;
+                }
+                else
+                {
+                    discount = 0.0M;
+                }
+
+                tax = Convert.ToDecimal((product.Price * qty) * taxAmount);
+                total = Convert.ToDecimal(((product.Price * qty) - discount) + tax);
+
+                productprice = product.Price * qty;
+                seminGrandTotal += product.Price;
+                grandTotal += total;
+                grandDiscount += discount;
+                grandTax += tax;
+            
+            <tr>
+                <td>
+                    <img width="60" src="@Url.Content("~/Content/ProductImage/")@product.ProductImage" style="width:80px; height: 80px;"/></td>
+                <td>
+                    @Html.DisplayFor(model => product.ProductName)<br />
+                    @Html.DisplayFor(model => product.ProductDescription)
+                    @*@product.ProductName<br />
+                    @product.ProductDescription*@
+
+                </td>
+                <td>
+                    <div class="input-append">
+                        <input class="span1" style="max-width: 34px" id="ProductQty" name="ProductQty" type="number" min="1" max="@product.MaxProduct" value="@product.Qty" onchange="test(this,'@product.ProductId');">
+                        @*<button class="btn" type="button"><i class="icon-minus"></i></button>
+                        <button class="btn" type="button"><i class="icon-plus"></i></button>*@
+                        <button class="btn btn-danger" type="button" value="Remove" onclick="removeCurrentProduct(@index)"><i class="icon-remove icon-white"></i></button>
+                    </div>
+                </td>
+                <td>@productprice</td>
+                <td>@discount</td>
+                <td>
+                    @tax
+                </td>
+                <td>
+                    <span id="@product.ProductId">
+                        @total
+                    </span></td>
+
+            </tr>
+                index++;
+            }
+        
+            <tr>
+                <td colspan="6" style="text-align: right"><strong>TOTAL (@productprice - @grandDiscount + @grandTax) =</strong></td>
+                <td class="label label-important" style="display: block"><strong>@grandTotal </strong></td>
+            </tr>
+            
+            Session["GrandTotal"] = grandTotal;
+            Session["TaxAmount"] = grandTax;
+        }
+    </tbody>
+</table>
