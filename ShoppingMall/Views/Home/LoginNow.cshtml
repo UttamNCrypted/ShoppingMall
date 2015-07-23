@@ -1,0 +1,83 @@
+﻿@model ShoppingMall.Models.User
+    @{
+        ViewBag.Title = "LoginNow";
+        Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    }
+    <div id="mainBody">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+
+               
+                    @Html.Partial("_SideBarMenu")
+               
+                    <div class="span9" style="width:870px;">
+                        <ul class="breadcrumb">
+                            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                            <li class="active">Login</li>
+                        </ul>
+                        <h3 style="margin-left:25px;"> Login</h3>
+                        <hr class="soft" />
+                        @if (ViewBag.ErrorMsg != null)
+                        {
+                            @ViewBag.ErrorMsg;
+                        }
+                        @using (Html.BeginForm("LoginNow", "Home", FormMethod.Post))
+                        {
+                        <div class="span4">
+                            <div class="well">
+                                <h5>ALREADY REGISTERED ?</h5>
+                                <form>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail1">Email</label>
+                                        <div class="controls">
+                                            <input type="text" id="Email" class="span3" name="Email" placeholder="Email" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword1">Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="Password" class="span3" name="Password" placeholder="Password" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" class="btn">Sign in</button> <span style="float:right;"><a href="@Url.Action("ForgotPassword","Home")">Forget password?</a></span>
+                                            <span style="float:right;"><a href="@Url.Action("Registration","Home")">New User Registration?</a></span>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        }
+                      @*@using (Html.BeginForm("Registration", "Home", FormMethod.Post))
+                      {
+
+                        <div class="row">
+                            <div class="span4">
+                                <div class="well">
+                                    <h5>CREATE YOUR ACCOUNT</h5><br />
+                                    Enter your e-mail address to create an account.<br /><br /><br />
+                                    <form action="register.html">
+                                        <div class="control-group">
+                                            <label class="control-label" for="inputEmail0">E-mail address</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="inputEmail0" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="controls">
+                                            <button type="submit" class="btn block">Create Your Account</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+                      }*@
+
+                    </div>
+                </div>
+</div>
+</div>

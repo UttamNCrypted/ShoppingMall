@@ -1,0 +1,137 @@
+﻿@{
+    ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+    
+    int startPrice;
+    int endPrice;
+    int pageNumber;
+    Guid subcategoryid;
+    Guid categoryid;
+
+    startPrice = ViewBag.startPrice;
+    endPrice = ViewBag.endPrice;
+    pageNumber = ViewBag.pageNumber;
+    subcategoryid = ViewBag.subcategoryid;
+    categoryid = ViewBag.categoryid;
+
+
+    //int PageNumber = Convert.ToInt32(ViewBag.PageNumber);
+    int RecordPerPage = 6;
+    
+    if (pageNumber != null && subcategoryid == Guid.Empty)
+    {
+        var productss = db.Products.Where(p => p.Price > startPrice && p.Price <= endPrice).OrderBy(p => p.Price).Skip(RecordPerPage * (pageNumber - 1)).Take(6).ToList();
+        <ul class="thumbnails">
+
+                                @foreach (var products in productss)
+                                {
+
+                                    int newprice = 0;
+                                    if (products.Discount != null && products.Discount != 0)
+                                    {
+                                        newprice = Convert.ToInt32(products.Price - ((products.Price * products.Discount) / 100));
+                                    }
+                                    <li class="span3">
+                                        <div class="thumbnail" style="height:450px;">
+
+                                            <a href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })">
+                                                <img style="height:250px;" src="@Url.Content("~/Content/ProductImage/")@products.ProductImage" alt="" /></a>
+                                            <div class="caption">
+                                                <h5 style="font-size: 18px; max-height: 22px; overflow: hidden;"><a href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })">@products.ProductName</a></h5>
+
+                                                <h6 style="max-height: 60px; min-height: 60px; overflow: hidden;">
+                                                    @products.ProductDescription
+                                                </h6>
+
+                                                <span style="margin-left: 10px; color: #08C; font-size: 22px;">Rs. @newprice</span><span style="margin-left: 10px; text-decoration: line-through; color: gray; font-size: 13px;">Rs. @Convert.ToInt32(products.Price).ToString()</span><span style="margin-left: 5px; color: gray">(@Convert.ToInt32(products.Discount)% Off)</span>
+
+
+                                                <h4 style="text-align: center"><a class="btn" href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })"><i class="icon-zoom-in"></i></a><a class="btn" href="@Url.Action("AddtoCart", "Home", new { ProductId = products.ProductID })">Add to <i class="icon-shopping-cart"></i></a></h4>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                }
+
+
+                            </ul>
+                            <hr class="soft" />
+    }
+    else if (pageNumber != null && subcategoryid != null)
+    {
+        var SubCategory = db.Products.Where(sc => sc.Price > startPrice && sc.Price <= endPrice && sc.SubcategoyID == subcategoryid).OrderBy(p => p.Price).Skip(RecordPerPage * (pageNumber - 1)).Take(6).ToList();
+        <ul class="thumbnails">
+
+                                @foreach (var products in SubCategory)
+                                {
+
+                                    int newprice = 0;
+                                    if (products.Discount != null && products.Discount != 0)
+                                    {
+                                        newprice = Convert.ToInt32(products.Price - ((products.Price * products.Discount) / 100));
+                                    }
+                                    <li class="span3">
+                                        <div class="thumbnail" style="height:450px;">
+
+                                            <a href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })">
+                                                <img style="height:250px;" src="@Url.Content("~/Content/ProductImage/")@products.ProductImage" alt="" /></a>
+                                            <div class="caption">
+                                                <h5 style="font-size: 18px; max-height: 22px; overflow: hidden;"><a href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })">@products.ProductName</a></h5>
+
+                                                <h6 style="max-height: 60px; min-height: 60px; overflow: hidden;">
+                                                    @products.ProductDescription
+                                                </h6>
+
+                                                <span style="margin-left: 10px; color: #08C; font-size: 22px;">Rs. @newprice</span><span style="margin-left: 10px; text-decoration: line-through; color: gray; font-size: 13px;">Rs. @Convert.ToInt32(products.Price).ToString()</span><span style="margin-left: 5px; color: gray">(@Convert.ToInt32(products.Discount)% Off)</span>
+
+
+                                                <h4 style="text-align: center"><a class="btn" href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })"><i class="icon-zoom-in"></i></a><a class="btn" href="@Url.Action("AddtoCart", "Home", new { ProductId = products.ProductID })">Add to <i class="icon-shopping-cart"></i></a></h4>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                }
+
+
+                            </ul>
+                            <hr class="soft" />
+    }
+    else if (pageNumber != null && categoryid != null)
+    {
+        var SubCategory = db.Products.Where(sc => sc.Price > startPrice && sc.Price <= endPrice && sc.SubCategory.CategoryID == categoryid).OrderBy(p => p.Price).Skip(RecordPerPage * (pageNumber - 1)).Take(6).ToList();
+        <ul class="thumbnails">
+
+                                @foreach (var products in SubCategory)
+                                {
+
+                                    int newprice = 0;
+                                    if (products.Discount != null && products.Discount != 0)
+                                    {
+                                        newprice = Convert.ToInt32(products.Price - ((products.Price * products.Discount) / 100));
+                                    }
+                                    <li class="span3">
+                                        <div class="thumbnail" style="height:450px;">
+
+                                            <a href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })">
+                                                <img style="height:250px;" src="@Url.Content("~/Content/ProductImage/")@products.ProductImage" alt="" /></a>
+                                            <div class="caption">
+                                                <h5 style="font-size: 18px; max-height: 22px; overflow: hidden;"><a href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })">@products.ProductName</a></h5>
+
+                                                <h6 style="max-height: 60px; min-height: 60px; overflow: hidden;">
+                                                    @products.ProductDescription
+                                                </h6>
+
+                                                <span style="margin-left: 10px; color: #08C; font-size: 22px;">Rs. @newprice</span><span style="margin-left: 10px; text-decoration: line-through; color: gray; font-size: 13px;">Rs. @Convert.ToInt32(products.Price).ToString()</span><span style="margin-left: 5px; color: gray">(@Convert.ToInt32(products.Discount)% Off)</span>
+
+
+                                                <h4 style="text-align: center"><a class="btn" href="@Url.Action("ProductDetails", "Home", new { ProductID = products.ProductID })"><i class="icon-zoom-in"></i></a><a class="btn" href="@Url.Action("AddtoCart", "Home", new { ProductId = products.ProductID })">Add to <i class="icon-shopping-cart"></i></a></h4>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                }
+
+
+                            </ul>
+                            <hr class="soft" />
+    }
+}
