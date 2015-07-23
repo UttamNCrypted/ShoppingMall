@@ -1,0 +1,49 @@
+﻿<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+
+        @{
+            ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+            var products = db.Products.Where(p => p.Discount != null).OrderByDescending(p => p.Discount).ToList();
+            int count = products.Count;
+            int counter = 0;
+            int newPrice;
+            foreach (var product in products)
+            {
+                newPrice = Convert.ToInt32(( product.Price - ((product.Price * product.Discount) / 100)));
+                
+                string className = "";
+                if (counter == 0)
+                {
+
+                    className = "active";
+                }
+                else
+                {
+                    className = "";
+                }
+                    
+            <div class="item @className" >
+                <div class="container" style="width: 100%; height:300px;">
+                    <div style="width: 48%; float: left;">
+                        <a href="@Url.Action("ProductDetails", "Home", new { ProductId = product.ProductID })">
+                            <img src="@Url.Content("~/Content/ProductImage/")@product.ProductImage" alt="" style="height:350px; width:250px;"/></a>
+                    </div>
+                    <div style="float: left;width: 48%;min-height: 250px;">
+                        <a href="@Url.Action("ProductDetails", "Home", new { ProductId = product.ProductID })">
+                            <h2>@product.ProductName</h2>
+                        </a>
+                        <p>@product.ProductDescription</p>
+                        <h4 style="text-align: center; margin-bottom: 0px;"><a class="btn btn-primary" style="padding:1% 4%;" href="@Url.Action("AddtoCart", "Home", new { ProductId = product.ProductID })">Add to <i class="icon-shopping-cart"></i></a><span style="margin-left: 5px; margin-top:5px; text-decoration: line-through;color:red;font-size:20px;"> @Convert.ToInt32(product.Price).ToString()</span><span style="margin-left:10px;color:#5bb75b;font-size:20px;">@newPrice</span></h4>
+                    </div>
+
+                </div>
+
+            </div>
+                counter++;
+
+            }
+        }
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>

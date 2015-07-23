@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                @{
+                    ShoppingMall.Models.ShoppingCartDatabaseContexts db = new ShoppingMall.Models.ShoppingCartDatabaseContexts();
+
+                    string Email = Session["UserName"].ToString();
+
+                    Guid userId = db.Users.Where(u => u.EmailID == Email).Single().UsersID;
+                    var order = db.Orders.Where(o => o.UsersID == userId).OrderByDescending(o => o.CreateDate).First();
+                    
+                    <table class="table table-bordered">
+                        <tr>
+                            <td colspan="2" style="background-color: #e3e3e3;">
+                                <img src="../../Content/themes/images/logo.png" style="height: 80px; width: 80px; float:left;" />
+                                <div style="float: left;margin-top: 4%;font-size: 28px;">ShoppingMall</div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Order Date: @order.OrderDate.Value.ToShortDateString()</td>
+
+                            <td style="text-align: right;font-weight:bold;">Order Number: @order.OrderID</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: right"><strong>Name: @order.User.FristName @order.User.LastName</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: right"><strong>Address: @order.Shippings.First().Address</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table style="width:100%;border:1px solid;">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th>Size</th>
+                                            <th>Price</th>
+                                            <th>Discount</th>
+                                            <th>Final Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var orderDetails = db.OrderDetails.Where(od => od.OrderID == order.OrderID).ToList();
+                                            
+                                            if (orderDetails.Count > 0)
+                                            {
+                                                
+                                                foreach (var orderdetail in orderDetails)
+                                                {
+                                                    var OrderPrice = (orderdetail.Qty * orderdetail.Price);
+                                            <tr>
+                                                <td>@orderdetail.Product.ProductName</td>
+                                                <td>@orderdetail.Product.ProductDescription</td>
+                                                <td>@orderdetail.Qty</td>
+                                                <td>@orderdetail.Size</td>
+                                                
+                                                <td>@OrderPrice</td>
+                                            </tr>
+                                                }
+                                            }
+                    
+                                        }
+                                        <tr>
+                                            <td colspan="4" style="text-align: right"><strong>Tax (@order.TaxAmount) =</strong></td>
+                                            <td class="label label-important" style="display: block"><strong>@order.TotalAmount </strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
