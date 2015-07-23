@@ -1,0 +1,44 @@
+﻿@model ShoppingMall.Models.LoginModel
+@{
+    Layout=null;
+}
+
+<div id="login" class="modal hide fade in" style="text-align:center;" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3>Login Block</h3>
+		  </div>
+		  <div class="modal-body">
+			<form class="form-horizontal loginFrm">
+			  <div class="control-group">	
+                  @Html.LabelFor(model=>model.UserName)			
+                  @Html.EditorFor(model => model.UserName)				
+                  @Html.ValidationMessageFor(model=>model.UserName)
+				@*<input type="text" id="inputEmail" placeholder="Email">*@
+			  </div>
+			  <div class="control-group">
+                  @Html.Label("Password")
+                  @Html.PasswordFor(model=>model.Password)
+                  @Html.ValidationMessageFor(model=>model.Password)
+				@*<input type="password" id="inputPassword" placeholder="Password">*@
+			  </div>
+			  @*<div class="control-group">
+				<label class="checkbox">
+				<input type="checkbox"> Remember me
+				</label>
+			  </div>*@
+			</form>		
+              <div class="control-group">
+			            <button type="submit" class="btn btn-success">Sign in</button>
+			            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                  </div>
+             <div class="control-group">
+                 <span style="padding:8px;">
+                    <a href="#">Forgot Password ?</a>
+            </span>
+                 <span>
+                      <a href="#">New User Registration</a>
+                     </span>
+                  </div>
+		  </div>
+	</div>
