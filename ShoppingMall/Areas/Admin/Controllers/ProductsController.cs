@@ -80,7 +80,7 @@ namespace ShoppingMall.Areas.Admin.Controllers
                     else
                     {
                         product.ProductImage = product.ProductID + fi.Extension;
-                        file.SaveAs(Server.MapPath("~/Content/ProductImage/" + product.ProductID + fi.Extension));
+                        file.SaveAs(Server.MapPath("~/Content/" + product.ProductID + fi.Extension));
                     }
                 }
                 db.Products.Add(product);

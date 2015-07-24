@@ -45,7 +45,7 @@
     <div class="row" style="margin-bottom:20px; margin-top:20px; border-bottom:1px thin black;">
 
         <div class="span2">
-            <img style="height:250px;" src="@Url.Content("~/Content/ProductImage/")@product.ProductImage" alt="" />
+            <img style="height:250px;" src="@Url.Content("~/Content/")@product.ProductImage" alt="" />
         </div>
         <div class="span4">
             <h3>@product.ProductName</h3>
@@ -85,7 +85,7 @@
     <li class="span3">
         <div class="thumbnail">
 
-            <a href="@Url.Action("ProductDetails","Home",new{ProductID=product.ProductID})"><img style="height:250px;" src="@Url.Content("~/Content/ProductImage/")@product.ProductImage" alt="" /></a>
+            <a href="@Url.Action("ProductDetails","Home",new{ProductID=product.ProductID})"><img style="height:250px;" src="@Url.Content("~/Content/")@product.ProductImage" alt="" /></a>
             <div class="caption">
                 <h5 style="font-size:18px;   max-height: 22px;
   overflow: hidden;"><a href="@Url.Action("ProductDetails","Home",new{ProductID=product.ProductID})">@product.ProductName</a></h5>

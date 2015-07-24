@@ -32,7 +32,7 @@
 
 				  <div class="thumbnail" style="background-color:white;">
 				 
-					<a href="@Url.Action("ProductDetails","Home",new{ProductID=products.ProductID})"><img src="@Url.Content("~/Content/ProductImage/")@products.ProductImage" style="height:250px;" alt=""></a>
+					<a href="@Url.Action("ProductDetails","Home",new{ProductID=products.ProductID})"><img src="@Url.Content("~/Content/")@products.ProductImage" style="height:250px;" alt=""></a>
 					<div class="caption">
 					  <h5 style=" max-height: 24px; overflow: hidden;"><a href="@Url.Action("ProductDetails","Home",new{ProductID=products.ProductID})">@products.ProductName</a></h5>
                         <p  style="max-height:60px; min-height:58px; overflow:hidden;">@products.ProductDescription</p>
