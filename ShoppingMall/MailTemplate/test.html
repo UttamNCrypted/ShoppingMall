@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <title>Signature</title>
+    <link href="signature.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="signature.js"></script>  
+    <script type="text/javascript">
+        function loaded() {
+            var signature = new ns.SignatureControl({
+                containerId: 'container', callback: function () {
+                    alert('hello');
+                }
+            });
+            signature.init();
+        }
+
+        //window.addEventListener('DOMContentLoaded', loaded, false);
+    </script>  
+</head>
+<body>
+    
+    <div id="container">        
+    </div>
+    <button id="btnDraw" onclick="loaded();">Draw Signature</button>
+</body>
+</html>
